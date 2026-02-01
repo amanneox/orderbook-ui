@@ -1,0 +1,447 @@
+/* Premium HFT Font Imports - loaded in index.html for performance */
+
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@import url('./assets/style.css');
+
+/* ============================================
+   HFT TERMINAL THEME - Deep Dark Orange
+   ============================================ */
+
+@layer base {
+    :root {
+        /* Deep Dark Orange Color Palette */
+        /* Primary: Deep Burnt Orange */
+        --primary-hue: 18;
+        --primary-sat: 88%;
+        --primary-light: 48%;
+        
+        /* Background: Near Black with Warm Undertone */
+        --background: 15 15% 4%;           /* #0c0a09 - Warm near-black */
+        --foreground: 30 20% 95%;          /* #f5f2ef - Warm white */
+        
+        /* Cards: Elevated Dark Surfaces */
+        --card: 15 12% 6%;                 /* #12100e - Dark warm gray */
+        --card-foreground: 30 20% 95%;
+        --card-hover: 15 12% 8%;           /* Slightly lighter on hover */
+        
+        /* Popovers & Dropdowns */
+        --popover: 15 12% 6%;
+        --popover-foreground: 30 20% 95%;
+        
+        /* Primary: Deep Burnt Orange */
+        --primary: 18 88% 48%;             /* #e85d04 - Deep orange */
+        --primary-foreground: 15 15% 4%;   /* Near black text */
+        
+        /* Primary Scale */
+        --primary-50: 18 100% 97%;
+        --primary-100: 18 100% 92%;
+        --primary-200: 18 95% 82%;
+        --primary-300: 18 90% 68%;
+        --primary-400: 18 88% 58%;
+        --primary-500: 18 88% 48%;         /* Base */
+        --primary-600: 18 90% 42%;
+        --primary-700: 18 92% 36%;
+        --primary-800: 18 94% 28%;
+        --primary-900: 18 96% 18%;
+        
+        /* Secondary: Dark Metallic */
+        --secondary: 15 8% 14%;            /* #262422 - Dark metallic */
+        --secondary-foreground: 30 20% 90%;
+        
+        /* Muted States */
+        --muted: 15 8% 18%;
+        --muted-foreground: 30 10% 55%;
+        
+        /* Accent: Amber Gold */
+        --accent: 35 92% 45%;              /* #d97706 - Amber gold */
+        --accent-foreground: 15 15% 4%;
+        
+        /* Destructive: Deep Red */
+        --destructive: 0 84% 55%;
+        --destructive-foreground: 0 0% 98%;
+        
+        /* Borders & Dividers */
+        --border: 18 30% 18%;              /* Subtle orange-tinted border */
+        --input: 15 8% 14%;
+        --ring: 18 88% 48%;
+        
+        /* Radius: Slight rounding for modern feel */
+        --radius: 4px;
+        
+        /* Chart Colors - Complementary to deep orange */
+        --chart-1: 18 88% 48%;             /* Deep Orange */
+        --chart-2: 35 92% 45%;             /* Amber Gold */
+        --chart-3: 190 80% 50%;            /* Cyan accent */
+        --chart-4: 280 70% 55%;            /* Purple accent */
+        --chart-5: 145 70% 45%;            /* Green accent */
+        
+        /* Semantic Colors */
+        --success: 145 70% 45%;
+        --warning: 35 92% 45%;
+        --error: 0 84% 55%;
+        --info: 190 80% 50%;
+    }
+
+    .dark {
+        --background: 15 15% 4%;
+        --foreground: 30 20% 95%;
+        --card: 15 12% 6%;
+        --card-foreground: 30 20% 95%;
+        --popover: 15 12% 6%;
+        --popover-foreground: 30 20% 95%;
+        --primary: 18 88% 48%;
+        --primary-foreground: 15 15% 4%;
+        --secondary: 15 8% 14%;
+        --secondary-foreground: 30 20% 90%;
+        --muted: 15 8% 18%;
+        --muted-foreground: 30 10% 55%;
+        --accent: 35 92% 45%;
+        --accent-foreground: 15 15% 4%;
+        --destructive: 0 84% 55%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 18 30% 18%;
+        --input: 15 8% 14%;
+        --ring: 18 88% 48%;
+        --radius: 4px;
+        --chart-1: 18 88% 48%;
+        --chart-2: 35 92% 45%;
+        --chart-3: 190 80% 50%;
+        --chart-4: 280 70% 55%;
+        --chart-5: 145 70% 45%;
+    }
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    html {
+        @apply antialiased;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+        @apply bg-background text-foreground font-sans;
+        font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+        font-variant-numeric: tabular-nums;
+    }
+
+    /* Monospace for data-heavy elements */
+    code, kbd, pre, .font-mono {
+        font-feature-settings: "cv01", "cv09", "cv10";
+    }
+
+    /* Display font for headers */
+    h1, h2, h3, h4, h5, h6, .font-display {
+        @apply font-display font-semibold tracking-tight;
+    }
+
+    /* Selection styling */
+    ::selection {
+        @apply bg-primary/30 text-foreground;
+    }
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR - Deep Orange Theme
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-left: 1px solid hsl(var(--border));
+}
+
+::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.25);
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+    box-shadow: 0 0 8px hsl(var(--primary) / 0.3);
+}
+
+::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+    
+    /* Glass morphism effect */
+    .glass {
+        @apply bg-card/80 backdrop-blur-md border border-border/50;
+    }
+    
+    /* Gradient text */
+    .gradient-text {
+        @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+        background-size: 200% auto;
+    }
+    
+    /* Animated gradient border */
+    .gradient-border {
+        position: relative;
+        background: hsl(var(--card));
+    }
+    
+    .gradient-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        padding: 1px;
+        border-radius: inherit;
+        background: linear-gradient(
+            135deg,
+            hsl(var(--primary) / 0.5),
+            hsl(var(--accent) / 0.3),
+            hsl(var(--primary) / 0.5)
+        );
+        background-size: 200% 200%;
+        animation: border-flow 3s ease infinite;
+        -webkit-mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        mask: 
+            linear-gradient(#fff 0 0) content-box, 
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+    }
+    
+    /* Data table cell alignment */
+    .data-cell {
+        @apply font-mono text-xs tracking-wide;
+    }
+    
+    /* Terminal-style text */
+    .terminal-text {
+        @apply font-mono text-xs uppercase tracking-wider;
+    }
+    
+    /* Glow effects */
+    .glow-primary {
+        box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+    
+    .glow-accent {
+        box-shadow: 0 0 20px hsl(var(--accent) / 0.3);
+    }
+    
+    /* Status indicators */
+    .status-dot {
+        @apply w-2 h-2 rounded-full;
+    }
+    
+    .status-online {
+        @apply bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)];
+    }
+    
+    .status-busy {
+        @apply bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.6)];
+    }
+    
+    .status-offline {
+        @apply bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.6)];
+    }
+    
+    /* Shimmer loading effect */
+    .shimmer {
+        background: linear-gradient(
+            90deg,
+            hsl(var(--muted)) 0%,
+            hsl(var(--muted-foreground) / 0.2) 50%,
+            hsl(var(--muted)) 100%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 2s linear infinite;
+    }
+    
+    /* Card hover lift */
+    .card-hover {
+        @apply transition-all duration-300;
+    }
+    
+    .card-hover:hover {
+        @apply -translate-y-0.5 shadow-glow-card;
+    }
+    
+    /* Price change indicators */
+    .price-up {
+        @apply text-emerald-400;
+        text-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    
+    .price-down {
+        @apply text-red-400;
+        text-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+    }
+    
+    /* Focus ring */
+    .focus-ring {
+        @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+    }
+}
+
+/* ============================================
+   COMPONENT OVERRIDES
+   ============================================ */
+
+@layer components {
+    /* Terminal Window Style */
+    .terminal-window {
+        @apply relative bg-card border border-border overflow-hidden;
+        box-shadow: 
+            0 4px 6px -1px rgba(0, 0, 0, 0.3),
+            0 2px 4px -1px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+    }
+    
+    .terminal-window::before {
+        content: '';
+        @apply absolute inset-0 pointer-events-none;
+        background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.02) 0%,
+            transparent 5%
+        );
+    }
+    
+    /* Window Header */
+    .window-header {
+        @apply flex items-center justify-between px-3 py-2 border-b border-border;
+        background: linear-gradient(
+            90deg,
+            hsl(var(--primary) / 0.05) 0%,
+            transparent 50%,
+            hsl(var(--primary) / 0.05) 100%
+        );
+    }
+    
+    /* Data Grid */
+    .data-grid {
+        @apply grid gap-px bg-border;
+    }
+    
+    .data-grid > * {
+        @apply bg-card;
+    }
+    
+    /* Order Book Specific */
+    .orderbook-row {
+        @apply flex items-center justify-between px-3 py-1 text-xs font-mono transition-colors;
+    }
+    
+    .orderbook-row:hover {
+        @apply bg-primary/5;
+    }
+    
+    .orderbook-depth-bar {
+        @apply absolute right-0 top-0 h-full opacity-20;
+    }
+    
+    /* Button Variants */
+    .btn-primary {
+        @apply bg-primary text-primary-foreground font-medium;
+        @apply hover:bg-primary/90 hover:shadow-[0_0_20px_hsl(var(--primary)/0.4)];
+        @apply active:scale-[0.98];
+        @apply transition-all duration-200;
+    }
+    
+    .btn-ghost {
+        @apply bg-transparent text-muted-foreground;
+        @apply hover:text-foreground hover:bg-secondary;
+        @apply transition-colors duration-200;
+    }
+    
+    /* Input Fields */
+    .input-field {
+        @apply bg-input border border-border rounded-sm px-3 py-2 text-sm;
+        @apply focus:border-primary/50 focus:ring-1 focus:ring-primary/20;
+        @apply placeholder:text-muted-foreground/50;
+        @apply transition-all duration-200;
+    }
+    
+    /* Badge Variants */
+    .badge-primary {
+        @apply bg-primary/10 text-primary border border-primary/20;
+    }
+    
+    .badge-success {
+        @apply bg-emerald-500/10 text-emerald-400 border border-emerald-500/20;
+    }
+    
+    .badge-warning {
+        @apply bg-amber-500/10 text-amber-400 border border-amber-500/20;
+    }
+    
+    .badge-error {
+        @apply bg-red-500/10 text-red-400 border border-red-500/20;
+    }
+}
+
+/* ============================================
+   SCANLINE & CRT EFFECTS
+   ============================================ */
+
+.scanlines {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    opacity: 0.03;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+}
+
+.crt-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 49;
+    opacity: 0.02;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+    animation: ticker 30s linear infinite;
+}
