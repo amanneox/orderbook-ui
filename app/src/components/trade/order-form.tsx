@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { toast } from "@/hooks/use-toast";
-import { ArrowRight, DollarSign, Hash, Percent, Wallet, TrendingUp, TrendingDown } from "lucide-react";
+import { ArrowRight, DollarSign, Hash, Wallet, TrendingUp, TrendingDown } from "lucide-react";
 
 type OrderSide = "buy" | "sell";
 type OrderType = "market" | "limit" | "stop";
@@ -295,25 +295,22 @@ export function OrderForm() {
 
                 {/* Leverage Input */}
                 <div className="space-y-1.5">
-                    <label className="text-2xs font-medium text-muted-foreground uppercase tracking-wider">
-                        Leverage
-                    </label>
-                    <div className="relative">
-                        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/50">
-                            <Percent size={14} />
-                        </div>
-                        <input
-                            type="range"
-                            min="1"
-                            max="100"
-                            value={leverage}
-                            onChange={(e) => setLeverage(e.target.value)}
-                            className="w-full h-8 px-9 accent-primary cursor-pointer"
-                        />
-                        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-mono text-primary">
+                    <div className="flex items-center justify-between">
+                        <label className="text-2xs font-medium text-muted-foreground uppercase tracking-wider">
+                            Leverage
+                        </label>
+                        <span className="text-xs font-mono text-primary font-semibold">
                             {leverage}x
                         </span>
                     </div>
+                    <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        value={leverage}
+                        onChange={(e) => setLeverage(e.target.value)}
+                        className="w-full h-2 accent-primary cursor-pointer"
+                    />
                 </div>
 
                 {/* Order Summary */}

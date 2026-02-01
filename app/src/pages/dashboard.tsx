@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import OrderbookContainer, {
     OrderbookColumn,
@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {
     Activity, Terminal, Power, Shield, Box, FileCode,
     LayoutDashboard, Settings, Zap, TrendingUp, Clock,
-    Bell, Wallet, ChevronRight, Radio
+    Wallet, ChevronRight, Radio
 } from "lucide-react";
 
 interface TradeLog {
@@ -205,16 +205,7 @@ const Sidebar = ({ currentPath = "/" }: { currentPath?: string }) => {
                 })}
             </nav>
 
-            {/* Bottom Actions */}
-            <div className="mt-auto flex flex-col gap-3 w-full px-2">
-                <div className="w-full h-px bg-border/50" />
-                <button className="p-2 text-muted-foreground hover:text-primary transition-colors rounded-sm hover:bg-secondary/50">
-                    <Bell size={18} />
-                </button>
-                <button className="p-2 text-muted-foreground hover:text-destructive transition-colors rounded-sm hover:bg-destructive/10">
-                    <Power size={18} />
-                </button>
-            </div>
+
         </aside>
     );
 };
@@ -289,6 +280,11 @@ export default function Dashboard() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
+    // Stable callback for price updates
+    const handlePriceUpdate = useCallback((price: number) => {
+        setMarkPrice(price);
+    }, []);
+
     // Redirect if not authenticated
     useEffect(() => {
         if (!user) navigate("/login");
@@ -356,10 +352,10 @@ export default function Dashboard() {
     );
 
     const marketStats: MarketStat[] = [
-        { label: "24h Volume", value: "2.4", suffix: "B", change: 12.5 },
-        { label: "Open Interest", value: "845.2", suffix: "M", change: 3.2 },
-        { label: "Funding Rate", value: "0.01", suffix: "%", change: -0.5 },
-        { label: "Index Price", value: markPrice.toFixed(2), prefix: "$" },
+        { label: "24h Volume", value: "--", suffix: "B", change: undefined },
+        { label: "Open Interest", value: "--", suffix: "M", change: undefined },
+        { label: "Funding Rate", value: "--", suffix: "%", change: undefined },
+        { label: "Mark Price", value: markPrice > 0 ? markPrice.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) : "--", prefix: markPrice > 0 ? "$" : "" },
     ];
 
     return (
@@ -448,7 +444,7 @@ export default function Dashboard() {
                                     <span className="text-xs font-medium text-emerald-400">+2.45%</span>
                                 </div>
                             </div>
-                            <CandleChart />
+                            <CandleChart onPriceUpdate={handlePriceUpdate} />
                         </div>
                     </TerminalWindow>
 
